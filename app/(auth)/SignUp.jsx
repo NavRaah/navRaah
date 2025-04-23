@@ -4,17 +4,60 @@ import {
   TextInput,
   StyleSheet,
   TouchableOpacity,
+  Alert,
 } from "react-native";
 import { useState } from "react";
-import { Link } from "expo-router";
+import { Link, useRouter } from "expo-router";
+import axios from "axios";
 
 export default function SignUp() {
+  const router = useRouter();
+
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [phone, setPhone] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
+  const [loading, setLoading] = useState(false);
 
+  const handleSignUp = async () => {
+    if (!name || !email || !phone || !password || !confirmPassword) {
+      return Alert.alert("Error", "All fields are required.");
+    }
+
+    if (password !== confirmPassword) {
+      return Alert.alert("Error", "Passwords do not match.");
+    }
+
+    try {
+      setLoading(true);
+      const response = await axios.post("http://10.21.2.176:3000/api/users/register", {
+        name,
+        email,
+        phone,
+        password,
+      });
+
+      if (response.status === 200) {
+        Alert.alert("Success", "Registered successfully!");
+        setName("");
+        setEmail("");
+        setPhone("");
+        setPassword("");
+        setConfirmPassword("");
+
+        router.replace("/passenger/dashboard");
+      }
+    } catch (error) {
+      if (error.response) {
+        Alert.alert("Error", error.response.data.message || "Something went wrong.");
+      } else {
+        Alert.alert("Error", "Failed to connect to server.");
+      }
+    } finally {
+      setLoading(false);
+    }
+  };
 
   return (
     <View style={styles.container}>
@@ -64,8 +107,14 @@ export default function SignUp() {
         onChangeText={setConfirmPassword}
       />
 
-      <TouchableOpacity style={styles.buttonPrimary}>
-        <Text style={styles.buttonText}>CREATE AN ACCOUNT</Text>
+      <TouchableOpacity
+        style={styles.buttonPrimary}
+        onPress={handleSignUp}
+        disabled={loading}
+      >
+        <Text style={styles.buttonText}>
+          {loading ? "Signing Up..." : "CREATE AN ACCOUNT"}
+        </Text>
       </TouchableOpacity>
 
       <TouchableOpacity style={styles.buttonOutline}>
