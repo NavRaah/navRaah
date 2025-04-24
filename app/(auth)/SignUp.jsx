@@ -12,6 +12,7 @@ import axios from "axios";
 
 export default function SignUp() {
   const router = useRouter();
+  const baseURL = process.env.EXPO_PUBLIC_API_URL;
 
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
@@ -24,29 +25,34 @@ export default function SignUp() {
     if (!name || !email || !phone || !password || !confirmPassword) {
       return Alert.alert("Error", "All fields are required.");
     }
-
+  
     if (password !== confirmPassword) {
       return Alert.alert("Error", "Passwords do not match.");
     }
-
+  
     try {
       setLoading(true);
-      const response = await axios.post("http://10.21.2.176:3000/api/users/register", {
+      const response = await axios.post(`${baseURL}/api/users/register`, {
         name,
         email,
         phone,
         password,
       });
 
-      if (response.status === 200) {
+  
+      if (response.status === 201) {
         Alert.alert("Success", "Registered successfully!");
+        
+        // Clear form
         setName("");
         setEmail("");
         setPhone("");
         setPassword("");
         setConfirmPassword("");
-
-        router.replace("/passenger/dashboard");
+  
+        setTimeout(() => {
+          router.push("/Login");
+        }, 100); 
       }
     } catch (error) {
       if (error.response) {
@@ -58,6 +64,7 @@ export default function SignUp() {
       setLoading(false);
     }
   };
+  
 
   return (
     <View style={styles.container}>

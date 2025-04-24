@@ -5,6 +5,7 @@ import { Link, useRouter } from 'expo-router';
 import axios from 'axios';
 
 export default function Login() {
+  const baseURL = process.env.EXPO_PUBLIC_API_URL;
   const router = useRouter();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -20,7 +21,7 @@ export default function Login() {
       setLoading(true);
 
       // Use Axios to make the login request
-      const response = await axios.post('http://10.21.2.176:3000/api/users/login', 
+      const response = await axios.post(`${baseURL}/api/users/login`, 
         { email, password },
         { 
           headers: { 'Content-Type': 'application/json' },
@@ -28,10 +29,17 @@ export default function Login() {
         }
       );
       const data = response.data;
-
       if (response.status === 200) {
         Alert.alert('Login Successful', `Welcome back, ${data.user?.name || 'User'}!`);
-        router.push("/passenger/dashboard");
+        if(data.user.role === "user"){
+          router.push("/user/dashboard");
+        }
+        else if(data.user.role === "admin"){
+          router.push("/admin/dashboard");
+        }
+        else if(data.user.role === "driver"){
+          router.push("/driver/dashboard");
+        }
       } else {
         Alert.alert('Login Failed', data.message || 'Invalid credentials');
       }
