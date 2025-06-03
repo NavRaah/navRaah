@@ -255,3 +255,5 @@ gradle-app.setting
 .nfs*
 
 # End of https://www.toptal.com/developers/gitignore/api/reactnative
+
+android/app/debug.keystore
