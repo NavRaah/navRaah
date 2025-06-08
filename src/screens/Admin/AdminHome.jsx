@@ -5,7 +5,7 @@ import { AuthContext } from '../../context/AuthContext';
 import { useNavigation } from '@react-navigation/native';
 import Toast from 'react-native-toast-message';
 
-const UserHome = () => {
+const AdminHome = () => {
     const navigation = useNavigation();
     const {logout} = useContext(AuthContext);
     const logoutHandler = () => {
@@ -31,7 +31,7 @@ const UserHome = () => {
     };
   return (
     <View style={styles.container}>
-      <Text style={styles.text}>UserHome</Text>
+      <Text style={styles.text}>Admin Home</Text>
       <TouchableOpacity style={styles.btn} onPress={logoutHandler}>
         <Text style={styles.btnTxt}>Logout</Text>
       </TouchableOpacity>
@@ -40,7 +40,7 @@ const UserHome = () => {
   );
 };
 
-export default UserHome;
+export default AdminHome;
 
 const styles = StyleSheet.create({
     container:{

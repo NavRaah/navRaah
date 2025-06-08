@@ -97,7 +97,7 @@ const LandingScreen = () => {
   return (
     <SafeAreaView style={styles.container}>
       <StatusBar barStyle="dark-content" backgroundColor="#f8fffe" />
-      
+
       {/* Enhanced Header with progress */}
       <View style={styles.header}>
         <Text style={styles.logoText}>NavRaah</Text>
@@ -130,14 +130,14 @@ const LandingScreen = () => {
         {currentSlideIndex === slides.length - 1 ? (
           <TouchableOpacity
             style={styles.getStartedButton}
-            onPress={() => navigation.replace('Home')}
+            onPress={() => navigation.replace('login')}
             activeOpacity={0.8}
           >
             <Text style={styles.getStartedText}>Get Started</Text>
           </TouchableOpacity>
         ) : (
           <View style={styles.bottomNav}>
-            <TouchableOpacity 
+            <TouchableOpacity
               style={styles.navButton}
               onPress={skipToLast}
               activeOpacity={0.7}
@@ -149,7 +149,7 @@ const LandingScreen = () => {
                 {currentSlideIndex + 1} of {slides.length}
               </Text>
             </View>
-            <TouchableOpacity 
+            <TouchableOpacity
               style={styles.navButton}
               onPress={goToNextSlide}
               activeOpacity={0.7}
