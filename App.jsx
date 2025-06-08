@@ -10,21 +10,25 @@ import { AuthProvider } from './src/context/AuthContext.jsx';
 import RegisterScreen from './src/screens/Auth/RegisterScreen.jsx';
 import UserHome from './src/screens/User/UserHome.jsx';
 
+import LandingScreen from './src/screens/LandingScreen'; 
+
 const Stack = createNativeStackNavigator();
 
 const App = () => {
   return (
     <AuthProvider>
       <NavigationContainer>
-        <Stack.Navigator initialRouteName="home">
+        <Stack.Navigator initialRouteName="Landing">
           <Stack.Screen name="home" component={HomeScreen} options={{ headerShown: false }} />
           <Stack.Screen name="details" component={DetailsScreen} options={{ headerShown: false }} />
           <Stack.Screen name="login" component={LoginScreen} options={{ headerShown: false }} />
           <Stack.Screen name="register" component={RegisterScreen} options={{ headerShown: false }} />
           <Stack.Screen name="UserHome" component={UserHome} options={{ headerShown: false }} />
+          <Stack.Screen name="Landing" component={LandingScreen} />
         </Stack.Navigator>
       </NavigationContainer>
     </AuthProvider>
+
   );
 };
 
