@@ -21,7 +21,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   containerText : {
-    fontSize: 24
+    fontSize: 24,
   },
   btn: {
     marginTop: 10,

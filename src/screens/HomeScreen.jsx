@@ -3,12 +3,15 @@ import React from 'react';
 import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
 
 const HomeScreen = () => {
-  const navigation = useNavigation()
+  const navigation = useNavigation();
   return (
     <View style={styles.container}>
       <Text style={styles.containerText}>Hello Yaswant !! </Text>
       <TouchableOpacity style={styles.btn}>
         <Text style={styles.btnText} onPress={()=>navigation.navigate('details')}>Go to details page</Text>
+      </TouchableOpacity>
+      <TouchableOpacity style={styles.btn}>
+        <Text style={styles.btnText} onPress={()=>navigation.navigate('login')}>Go to login page</Text>
       </TouchableOpacity>
     </View>
   );
