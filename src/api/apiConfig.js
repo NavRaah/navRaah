@@ -140,5 +140,13 @@ export const API_ENDPOINTS = {
     GET_ALL_ROUTES: '/api/route',
     GET_ROUTE_BY_ID: '/api/route',
   },
+  STOP: {
+    ADD_STOP: '/api/stop',
+    UPDATE_STOP: '/api/stop',
+    DELETE_STOP: '/api/stop',
+    GET_ALL_STOPS: '/api/stop',
+    GET_STOP_BY_ID: '/api/stop',
+    UPDATE_ACTUAL_ARRIVAL: '/api/stop',
+  },
 };
 export default apiClient;

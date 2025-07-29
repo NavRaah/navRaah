@@ -1,7 +1,9 @@
 import React, { useContext } from 'react';
-import { View, Text, ScrollView, StyleSheet, TouchableOpacity, SafeAreaView } from 'react-native';
+import { View, Text, ScrollView, StyleSheet, TouchableOpacity, SafeAreaView, Dimensions } from 'react-native';
 import { AuthContext } from '../../context/AuthContext';
 import Toast from 'react-native-toast-message';
+
+const { width: SCREEN_WIDTH } = Dimensions.get('window');
 
 const Profile = () => {
   const { logout } = useContext(AuthContext);
@@ -161,39 +163,54 @@ const styles = StyleSheet.create({
   header: {
     flexDirection: 'row',
     justifyContent: 'space-between',
-    alignItems: 'flex-start',
-    paddingHorizontal: 20,
-    paddingVertical: 20,
+    alignItems: SCREEN_WIDTH > 400 ? 'flex-start' : 'stretch',
+    paddingHorizontal: SCREEN_WIDTH > 400 ? 24 : 16,
+    paddingTop: SCREEN_WIDTH > 400 ? '15%' : '10%',
     backgroundColor: '#ffffff',
     borderBottomWidth: 1,
     borderBottomColor: '#e9ecef',
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.05,
+    shadowRadius: 4,
+    elevation: 2,
   },
   headerContent: {
     flex: 1,
-    marginRight: 15,
+    marginRight: SCREEN_WIDTH > 400 ? 15 : 0,
+    marginBottom: SCREEN_WIDTH > 400 ? 0 : 15,
   },
   headerTitle: {
-    fontSize: 24,
-    fontWeight: 'bold',
+    fontSize: SCREEN_WIDTH > 400 ? 28 : 24,
+    fontWeight: '700',
     color: '#1a1a1a',
     marginBottom: 8,
+    letterSpacing: -0.5,
   },
   headerSubtitle: {
-    fontSize: 14,
+    fontSize: SCREEN_WIDTH > 400 ? 16 : 14,
     color: '#6c757d',
-    lineHeight: 20,
+    lineHeight: SCREEN_WIDTH > 400 ? 24 : 20,
   },
   logoutBtn: {
     backgroundColor: '#dc3545',
-    paddingHorizontal: 16,
-    paddingVertical: 10,
-    borderRadius: 25,
-    marginTop: 8,
+    paddingHorizontal: SCREEN_WIDTH > 400 ? 20 : 16,
+    paddingVertical: SCREEN_WIDTH > 400 ? 12 : 10,
+    borderRadius: 30,
+    marginTop: SCREEN_WIDTH > 400 ? 8 : 0,
+    alignSelf: SCREEN_WIDTH > 400 ? 'flex-start' : 'center',
+    minWidth: 100,
+    alignItems: 'center',
+    shadowColor: '#dc3545',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.2,
+    shadowRadius: 4,
+    elevation: 3,
   },
   logoutText: {
     color: '#ffffff',
     fontWeight: '600',
-    fontSize: 14,
+    fontSize: SCREEN_WIDTH > 400 ? 16 : 14,
   },
   content: {
     flex: 1,

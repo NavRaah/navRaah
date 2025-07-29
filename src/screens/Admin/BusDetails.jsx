@@ -10,9 +10,12 @@ import {
   Modal,
   TextInput,
   ActivityIndicator,
+  Dimensions,
 } from 'react-native';
 import Toast from 'react-native-toast-message';
 import { BusService } from '../../services/busService';
+const { width: SCREEN_WIDTH } = Dimensions.get('window');
+
 
 const BusDetails = ({ route, navigation }) => {
   // Get the bus ID from route params
@@ -514,7 +517,8 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     alignItems: 'center',
     paddingHorizontal: '5%',
-    paddingVertical: 16,
+    paddingTop: SCREEN_WIDTH > 400 ? '15%' : '10%',
+    paddingBottom: 5,
     backgroundColor: '#ffffff',
     borderBottomWidth: 1,
     borderBottomColor: '#e9ecef',

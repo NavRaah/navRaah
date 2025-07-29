@@ -74,8 +74,8 @@ const AdminHome = () => {
       {/* Header */}
       <View style={styles.header}>
         <View style={styles.headerContent}>
-        <Text style={styles.headerTitle}>Admin Dashboard</Text>
-      <Text style={styles.headerSubtitle}>Manage your buses, routes, schedules, and stops.</Text>
+          <Text style={styles.headerTitle}>Admin Dashboard</Text>
+          <Text style={styles.headerSubtitle}>Manage your buses, routes, schedules, and stops.</Text>
         </View>
         <TouchableOpacity style={styles.logoutBtn} onPress={handleLogout}>
           <Text style={styles.logoutText}>Logout</Text>
@@ -119,7 +119,7 @@ const AdminHome = () => {
                 </TouchableOpacity>
                 <TouchableOpacity style={[styles.actionBtn, styles.viewBtn]}>
                   <Text style={styles.viewBtnText}>View Details</Text>
-            </TouchableOpacity>
+                </TouchableOpacity>
               </View>
             </View>
           </View>
@@ -128,7 +128,7 @@ const AdminHome = () => {
         <View style={styles.adminInfo}>
           <Text style={styles.adminInfoTitle}>System Information</Text>
           <Text style={styles.adminInfoText}>
-            Manage your buses, routes, schedules, and stops.
+            Manage your buses, routes, schedules, and stops efficiently with our comprehensive admin dashboard.
           </Text>
         </View>
       </ScrollView>
@@ -146,186 +146,202 @@ const styles = StyleSheet.create({
   header: {
     flexDirection: 'row',
     justifyContent: 'space-between',
-    alignItems: 'flex-start',
-    paddingHorizontal: 20,
-    paddingVertical: 20,
+    alignItems: SCREEN_WIDTH > 400 ? 'flex-start' : 'stretch',
+    paddingHorizontal: SCREEN_WIDTH > 400 ? 24 : 16,
+    paddingTop: SCREEN_WIDTH > 400 ? '15%' : '10%',
     backgroundColor: '#ffffff',
     borderBottomWidth: 1,
     borderBottomColor: '#e9ecef',
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.05,
+    shadowRadius: 4,
+    elevation: 2,
   },
   headerContent: {
     flex: 1,
-    marginRight: 15,
+    marginRight: SCREEN_WIDTH > 400 ? 15 : 0,
+    marginBottom: SCREEN_WIDTH > 400 ? 0 : 15,
   },
   headerTitle: {
-    fontSize: 24,
-    fontWeight: 'bold',
+    fontSize: SCREEN_WIDTH > 400 ? 28 : 24,
+    fontWeight: '700',
     color: '#1a1a1a',
     marginBottom: 8,
+    letterSpacing: -0.5,
   },
   headerSubtitle: {
-    fontSize: 14,
+    fontSize: SCREEN_WIDTH > 400 ? 16 : 14,
     color: '#6c757d',
-    lineHeight: 20,
+    lineHeight: SCREEN_WIDTH > 400 ? 24 : 20,
   },
   logoutBtn: {
     backgroundColor: '#dc3545',
-    paddingHorizontal: 16,
-    paddingVertical: 10,
-    borderRadius: 25,
-    marginTop: 8,
+    paddingHorizontal: SCREEN_WIDTH > 400 ? 20 : 16,
+    paddingVertical: SCREEN_WIDTH > 400 ? 12 : 10,
+    borderRadius: 30,
+    marginTop: SCREEN_WIDTH > 400 ? 8 : 0,
+    alignSelf: SCREEN_WIDTH > 400 ? 'flex-start' : 'center',
+    minWidth: 100,
+    alignItems: 'center',
+    shadowColor: '#dc3545',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.2,
+    shadowRadius: 4,
+    elevation: 3,
   },
   logoutText: {
     color: '#ffffff',
     fontWeight: '600',
-    fontSize: 14,
+    fontSize: SCREEN_WIDTH > 400 ? 16 : 14,
   },
   content: {
     flex: 1,
   },
   scrollContent: {
-    padding: 20,
+    padding: SCREEN_WIDTH > 400 ? 24 : 16,
+    paddingBottom: 100,
   },
   serviceCard: {
     backgroundColor: '#ffffff',
-    borderRadius: 16,
-    marginBottom: 20,
+    borderRadius: SCREEN_WIDTH > 400 ? 20 : 16,
+    marginBottom: SCREEN_WIDTH > 400 ? 24 : 20,
     shadowColor: '#000',
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.1,
-    shadowRadius: 8,
-    elevation: 4,
+    shadowOffset: { width: 0, height: 4 },
+    shadowOpacity: 0.12,
+    shadowRadius: 12,
+    elevation: 6,
     overflow: 'hidden',
   },
   serviceHeader: {
-    flexDirection: 'row',
-    padding: 20,
+    flexDirection: SCREEN_WIDTH > 350 ? 'row' : 'column',
+    padding: SCREEN_WIDTH > 400 ? 24 : 20,
     borderBottomWidth: 1,
     borderBottomColor: '#f8f9fa',
+    alignItems: SCREEN_WIDTH > 350 ? 'flex-start' : 'center',
   },
   serviceIconContainer: {
-    width: 80,
-    height: 80,
-    borderRadius: 12,
+    width: SCREEN_WIDTH > 400 ? 90 : 80,
+    height: SCREEN_WIDTH > 400 ? 90 : 80,
+    borderRadius: SCREEN_WIDTH > 400 ? 18 : 12,
     backgroundColor: '#e3f2fd',
     justifyContent: 'center',
     alignItems: 'center',
-    marginRight: 16,
+    marginRight: SCREEN_WIDTH > 350 ? 20 : 0,
+    marginBottom: SCREEN_WIDTH > 350 ? 0 : 16,
   },
   serviceIcon: {
-    fontSize: 32,
+    fontSize: SCREEN_WIDTH > 400 ? 36 : 32,
   },
   serviceInfo: {
     flex: 1,
+    alignItems: SCREEN_WIDTH > 350 ? 'flex-start' : 'center',
   },
   serviceTitle: {
-    fontSize: 18,
-    fontWeight: 'bold',
+    fontSize: SCREEN_WIDTH > 400 ? 20 : 18,
+    fontWeight: '700',
     color: '#1a1a1a',
-    marginBottom: 4,
+    marginBottom: 6,
+    textAlign: SCREEN_WIDTH > 350 ? 'left' : 'center',
   },
   serviceSubtitle: {
-    fontSize: 14,
+    fontSize: SCREEN_WIDTH > 400 ? 16 : 14,
     color: '#6c757d',
-    marginBottom: 12,
+    marginBottom: SCREEN_WIDTH > 400 ? 16 : 12,
+    textAlign: SCREEN_WIDTH > 350 ? 'left' : 'center',
   },
   serviceMetrics: {
-    flexDirection: 'row',
-    marginBottom: 8,
+    flexDirection: SCREEN_WIDTH > 350 ? 'row' : 'column',
+    marginBottom: SCREEN_WIDTH > 400 ? 12 : 8,
+    alignItems: SCREEN_WIDTH > 350 ? 'flex-start' : 'center',
   },
   metricItem: {
-    marginRight: 20,
+    marginRight: SCREEN_WIDTH > 350 ? 24 : 0,
+    marginBottom: SCREEN_WIDTH > 350 ? 0 : 8,
+    alignItems: SCREEN_WIDTH > 350 ? 'flex-start' : 'center',
   },
   metricLabel: {
-    fontSize: 12,
+    fontSize: SCREEN_WIDTH > 400 ? 13 : 12,
     color: '#6c757d',
-    marginBottom: 2,
+    marginBottom: 3,
+    fontWeight: '500',
   },
   metricValue: {
-    fontSize: 14,
+    fontSize: SCREEN_WIDTH > 400 ? 16 : 14,
     fontWeight: '600',
     color: '#1a1a1a',
   },
   contactInfo: {
-    fontSize: 12,
+    fontSize: SCREEN_WIDTH > 400 ? 13 : 12,
     color: '#6c757d',
+    fontStyle: 'italic',
   },
   serviceContent: {
-    padding: 20,
+    padding: SCREEN_WIDTH > 400 ? 24 : 20,
   },
   serviceDescription: {
-    fontSize: 14,
+    fontSize: SCREEN_WIDTH > 400 ? 16 : 14,
     color: '#495057',
-    lineHeight: 22,
-    marginBottom: 16,
-  },
-  featuresTitle: {
-    fontSize: 14,
-    fontWeight: '600',
-    color: '#1a1a1a',
-    marginBottom: 12,
-  },
-  featuresList: {
-    marginBottom: 20,
-  },
-  featureItem: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    marginBottom: 8,
-  },
-  featureDot: {
-    width: 6,
-    height: 6,
-    borderRadius: 3,
-    marginRight: 10,
-  },
-  featureText: {
-    fontSize: 13,
-    color: '#495057',
+    lineHeight: SCREEN_WIDTH > 400 ? 26 : 22,
+    marginBottom: SCREEN_WIDTH > 400 ? 24 : 20,
   },
   actionButtons: {
-    flexDirection: 'row',
-    gap: 12,
+    flexDirection: SCREEN_WIDTH > 350 ? 'row' : 'column',
+    gap: SCREEN_WIDTH > 400 ? 12 : 10,
   },
   actionBtn: {
-    flex: 1,
-    paddingVertical: 14,
-    borderRadius: 25,
+    flex: SCREEN_WIDTH > 350 ? 1 : 0,
+    paddingVertical: SCREEN_WIDTH > 400 ? 14 : 12,
+    paddingHorizontal: SCREEN_WIDTH > 400 ? 24 : 20,
+    borderRadius: SCREEN_WIDTH > 400 ? 12 : 10,
     alignItems: 'center',
     justifyContent: 'center',
+    minHeight: SCREEN_WIDTH > 400 ? 50 : 44,
   },
   manageBtn: {
-    backgroundColor: '#87ceeb',
+    backgroundColor: '#2196f3',
+    shadowColor: '#2196f3',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.2,
+    shadowRadius: 4,
+    elevation: 3,
   },
   manageBtnText: {
     color: '#ffffff',
     fontWeight: '600',
-    fontSize: 14,
+    fontSize: SCREEN_WIDTH > 400 ? 16 : 14,
   },
   viewBtn: {
-    backgroundColor: '#2196f3',
+    backgroundColor: 'transparent',
+    borderWidth: 2,
+    borderColor: '#2196f3',
   },
   viewBtnText: {
-    color: '#ffffff',
+    color: '#2196f3',
     fontWeight: '600',
-    fontSize: 14,
+    fontSize: SCREEN_WIDTH > 400 ? 16 : 14,
   },
   adminInfo: {
     backgroundColor: '#ffffff',
-    padding: 20,
-    borderRadius: 16,
-    marginTop: 10,
+    borderRadius: SCREEN_WIDTH > 400 ? 20 : 16,
+    padding: SCREEN_WIDTH > 400 ? 24 : 20,
+    marginTop: SCREEN_WIDTH > 400 ? 12 : 8,
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.08,
+    shadowRadius: 8,
+    elevation: 4,
   },
   adminInfoTitle: {
-    fontSize: 16,
-    fontWeight: '600',
+    fontSize: SCREEN_WIDTH > 400 ? 20 : 18,
+    fontWeight: '700',
     color: '#1a1a1a',
-    marginBottom: 12,
+    marginBottom: SCREEN_WIDTH > 400 ? 12 : 10,
   },
   adminInfoText: {
-    fontSize: 13,
-    color: '#6c757d',
-    lineHeight: 20,
+    fontSize: SCREEN_WIDTH > 400 ? 16 : 14,
+    color: '#495057',
+    lineHeight: SCREEN_WIDTH > 400 ? 26 : 22,
   },
 });
 
