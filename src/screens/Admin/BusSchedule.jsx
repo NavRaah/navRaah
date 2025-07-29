@@ -1,9 +1,11 @@
 import React, { useState, useEffect, useCallback } from 'react';
-import { View, Text, ScrollView, StyleSheet, TouchableOpacity, SafeAreaView, TextInput, Modal, ActivityIndicator } from 'react-native';
+import { View, Text, ScrollView, StyleSheet, TouchableOpacity, SafeAreaView, TextInput, Modal, ActivityIndicator, Dimensions } from 'react-native';
 import { useFocusEffect } from '@react-navigation/native';
 import Toast from 'react-native-toast-message';
 import { BusService } from '../../services/busService';
 import { SearchIcon } from 'lucide-react-native';
+
+const { width: SCREEN_WIDTH } = Dimensions.get('window');
 
 const BusSchedule = ({ navigation, route }) => {
    const [buses, setBuses] = useState([]);
@@ -201,55 +203,35 @@ const BusSchedule = ({ navigation, route }) => {
   const renderBusCard = (bus) => (
     <View key={bus.id} style={styles.busCard}>
       <View style={styles.busHeader}>
-        <View style={styles.busIconContainer}>
-          <Text style={styles.busIcon}>🚌</Text>
-        </View>
-        <View style={styles.busInfo}>
-          <Text style={styles.busTitle}>{bus.busNo}</Text>
-          <Text style={styles.busModel}>{bus.model}</Text>
-        </View>
-        <View style={styles.statusContainer}>
-          <View style={[
-            styles.statusDot,
-            { backgroundColor: bus.status === 'Active' ? '#28a745' : '#dc3545' }
-          ]} />
-          <Text style={[
-            styles.statusText,
-            { color: bus.status === 'Active' ? '#28a745' : '#dc3545' }
-          ]}>
-            {bus.status}
-          </Text>
-        </View>
-      </View>
 
-      <View style={styles.busContent}>
-        <Text style={styles.busDescription} numberOfLines={2}>
-          {bus.description}
-        </Text>
-
-        <View style={styles.busMetrics}>
-          <View style={styles.metricItem}>
-            <Text style={styles.metricLabel}>Capacity</Text>
-            <Text style={styles.metricValue}>{bus.capacity} seats</Text>
+        <View style={styles.busContent}>
+          <View style={styles.busInfo}>
+            <Text style={styles.busTitle}>{bus.busNo}</Text>
+            <View style={styles.busDetails}>
+              <Text style={styles.capacityText}>Capacity: {bus.capacity} seats</Text>
+              <View style={styles.statusContainer}>
+                <View style={[
+                  styles.statusDot,
+                  { backgroundColor: bus.status === 'Active' ? '#28a745' : '#dc3545' }
+                ]} />
+                <Text style={[
+                  styles.statusText,
+                  { color: bus.status === 'Active' ? '#28a745' : '#dc3545' }
+                ]}>
+                  {bus.status}
+                </Text>
+              </View>
+            </View>
           </View>
-          <View style={styles.metricItem}>
-            <Text style={styles.metricLabel}>Route</Text>
-            <Text style={styles.metricValue}>{bus.route}</Text>
-          </View>
-        </View>
-
-        <View style={styles.actionButtons}>
-          <TouchableOpacity style={styles.addToCartBtn}>
-            <Text style={styles.addToCartText}>Assign Route</Text>
-          </TouchableOpacity>
           <TouchableOpacity 
             style={styles.viewMoreBtn}
             onPress={() => {
               const busIdToPass = bus._id || bus.id;
               navigation.navigate('BusDetails', { busId: busIdToPass });
             }}
+            activeOpacity={0.8}
           >
-            <Text style={styles.viewMoreText}>View More</Text>
+            <Text style={styles.viewMoreText}>View Details</Text>
           </TouchableOpacity>
         </View>
       </View>
@@ -265,7 +247,7 @@ const BusSchedule = ({ navigation, route }) => {
             Manage your buses.
           </Text>
         </View>
-        <TouchableOpacity 
+        <TouchableOpacity
           style={styles.addBtn} 
           onPress={() => setModalVisible(true)}
           disabled={isLoading}  
@@ -451,45 +433,61 @@ const styles = StyleSheet.create({
   header: {
     flexDirection: 'row',
     justifyContent: 'space-between',
-    alignItems: 'flex-start',
-    paddingHorizontal: 20,
-    paddingVertical: 20,
+    alignItems: SCREEN_WIDTH > 400 ? 'flex-start' : 'stretch',
+    paddingHorizontal: SCREEN_WIDTH > 400 ? 24 : 16,
+    paddingTop: SCREEN_WIDTH > 400 ? '15%' : '10%',
     backgroundColor: '#ffffff',
     borderBottomWidth: 1,
     borderBottomColor: '#e9ecef',
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.05,
+    shadowRadius: 4,
+    elevation: 2,
   },
   headerContent: {
     flex: 1,
-    marginRight: 15,
+    marginRight: SCREEN_WIDTH > 400 ? 15 : 0,
+    marginBottom: SCREEN_WIDTH > 400 ? 0 : 15,
   },
   headerTitle: {
-    fontSize: 24,
-    fontWeight: 'bold',
+    fontSize: SCREEN_WIDTH > 400 ? 28 : 24,
+    fontWeight: '700',
     color: '#1a1a1a',
     marginBottom: 8,
+    letterSpacing: -0.5,
   },
   headerSubtitle: {
-    fontSize: 14,
+    fontSize: SCREEN_WIDTH > 400 ? 16 : 14,
     color: '#6c757d',
-    lineHeight: 20,
+    lineHeight: SCREEN_WIDTH > 400 ? 24 : 20,
   },
   addBtn: {
     backgroundColor: '#007bff',
-    paddingHorizontal: 16,
-    paddingVertical: 10,
-    borderRadius: 25,
-    marginTop: 8,
+    paddingHorizontal: SCREEN_WIDTH > 400 ? 20 : 16,
+    paddingVertical: SCREEN_WIDTH > 400 ? 12 : 10,
+    borderRadius: 30,
+    marginTop: SCREEN_WIDTH > 400 ? 8 : 0,
+    alignSelf: SCREEN_WIDTH > 400 ? 'flex-start' : 'center',
+    minWidth: 120,
+    alignItems: 'center',
+    shadowColor: '#007bff',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.2,
+    shadowRadius: 4,
+    elevation: 3,
   },
   addBtnText: {
     color: '#ffffff',
     fontWeight: '600',
-    fontSize: 14,
+    fontSize: SCREEN_WIDTH > 400 ? 16 : 14,
   },
   content: {
     flex: 1,
   },
   scrollContent: {
-    padding: 20,
+    padding: SCREEN_WIDTH > 400 ? 24 : 16,
+    paddingBottom: 100,
   },
   busCard: {
     backgroundColor: '#ffffff',
@@ -497,15 +495,15 @@ const styles = StyleSheet.create({
     marginBottom: 16,
     shadowColor: '#000',
     shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.08,
+    shadowOpacity: 0.1,
     shadowRadius: 8,
-    elevation: 3,
+    elevation: 4,
     overflow: 'hidden',
   },
   busHeader: {
     flexDirection: 'row',
-    padding: 16,
-    alignItems: 'flex-start',
+    padding: 20,
+    alignItems: 'center',
   },
   busIconContainer: {
     width: 60,
@@ -514,24 +512,36 @@ const styles = StyleSheet.create({
     backgroundColor: '#e6f3ff',
     justifyContent: 'center',
     alignItems: 'center',
-    marginRight: 12,
+    marginRight: 20,
   },
   busIcon: {
     fontSize: 24,
   },
+  busContent: {
+    flex: 1,
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+  },
   busInfo: {
     flex: 1,
+    marginRight: 15,
   },
   busTitle: {
     fontSize: 18,
-    fontWeight: 'bold',
+    fontWeight: '700',
     color: '#1a1a1a',
-    marginBottom: 4,
+    marginBottom: 6,
   },
-  busModel: {
-    fontSize: 14,
+  busDetails: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    flexWrap: 'wrap',
+  },
+  capacityText: {
+    fontSize: 12,
     color: '#6c757d',
-    marginBottom: 8,
+    marginRight: 12,
   },
   statusContainer: {
     flexDirection: 'row',
@@ -547,82 +557,23 @@ const styles = StyleSheet.create({
     fontSize: 12,
     fontWeight: '600',
   },
-  busContent: {
-    paddingHorizontal: 16,
-    paddingBottom: 16,
-  },
-  busDescription: {
-    fontSize: 14,
-    color: '#6c757d',
-    lineHeight: 20,
-    marginBottom: 16,
-  },
-  busMetrics: {
-    flexDirection: 'row',
-    marginBottom: 16,
-  },
-  metricItem: {
-    flex: 1,
-  },
-  metricLabel: {
-    fontSize: 12,
-    color: '#6c757d',
-    marginBottom: 4,
-  },
-  metricValue: {
-    fontSize: 14,
-    fontWeight: '600',
-    color: '#1a1a1a',
-  },
-  priceContainer: {
-    flexDirection: 'row',
-    alignItems: 'baseline',
-    marginBottom: 16,
-  },
-  priceLabel: {
-    fontSize: 12,
-    color: '#6c757d',
-    marginRight: 6,
-  },
-  priceValue: {
-    fontSize: 20,
-    fontWeight: 'bold',
-    color: '#007bff',
-    marginRight: 4,
-  },
-  priceUnit: {
-    fontSize: 12,
-    color: '#6c757d',
-  },
-  actionButtons: {
-    flexDirection: 'row',
-    gap: 12,
-  },
-  addToCartBtn: {
-    flex: 1,
-    backgroundColor: '#87ceeb',
-    paddingVertical: 12,
-    borderRadius: 25,
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  addToCartText: {
-    color: '#ffffff',
-    fontWeight: '600',
-    fontSize: 14,
-  },
   viewMoreBtn: {
-    flex: 1,
     backgroundColor: '#007bff',
-    paddingVertical: 12,
-    borderRadius: 25,
-    alignItems: 'center',
-    justifyContent: 'center',
+    paddingHorizontal: 20,
+    paddingVertical: 10,
+    borderRadius: 20,
+    shadowColor: '#007bff',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.2,
+    shadowRadius: 4,
+    elevation: 3,
+    minWidth: 100,
   },
   viewMoreText: {
     color: '#ffffff',
     fontWeight: '600',
     fontSize: 14,
+    textAlign: 'center',
   },
   infoCard: {
     backgroundColor: '#ffffff',
