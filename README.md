@@ -29,9 +29,10 @@
    ```
 3. Download the **Expo Go app** on your mobile:  
    - [Expo Go for Android](https://play.google.com/store/apps/details?id=host.exp.exponent)  
-   - [Expo Go for iOS](https://apps.apple.com/app/expo-go/id982107779)  
-4. Scan the QR code from the terminal or Expo Dev Tools in the browser.  
-5. 🎉 Enjoy your app running on your device!  
+   - [Expo Go for iOS](https://apps.apple.com/app/expo-go/id982107779)
+4. If you were using a development build, switch back to Expo Go.
+5. Scan the QR code from the terminal or Expo Dev Tools in the browser.  
+6. 🎉 Enjoy your app running on your device!  
 
 ---
 
